@@ -41,6 +41,9 @@ Prior steps covered on the course:
 
 **Mac/Linux**:
 ```bash
+# Load environment variables
+export $(cat .env | grep -v '^#' | xargs)
+
 # 1. Authenticate Docker to ECR (using your .env values!)
 aws ecr get-login-password --region $DEFAULT_AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$DEFAULT_AWS_REGION.amazonaws.com
 
@@ -56,6 +59,13 @@ docker push $AWS_ACCOUNT_ID.dkr.ecr.$DEFAULT_AWS_REGION.amazonaws.com/consultati
 
 **Windows PowerShell**:
 ```powershell
+# Load environment variables
+Get-Content .env | ForEach-Object {
+    if ($_ -match '^(.+?)=(.+)$') {
+        [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2])
+    }
+}
+
 # 1. Authenticate Docker to ECR
 aws ecr get-login-password --region $env:DEFAULT_AWS_REGION | docker login --username AWS --password-stdin "$env:AWS_ACCOUNT_ID.dkr.ecr.$env:DEFAULT_AWS_REGION.amazonaws.com"
 

@@ -1,0 +1,10 @@
+{
+  "framework": "nextjs",
+  "devCommand": "next dev --webpack --port $PORT",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    }
+  ]
+}

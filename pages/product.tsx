@@ -36,7 +36,7 @@ function ConsultationForm() {
         const controller = new AbortController();
         let buffer = '';
 
-        await fetchEventSource('/api', {
+        await fetchEventSource('/api/consultation', {
             signal: controller.signal,
             method: 'POST',
             headers: {
@@ -168,4 +168,10 @@ export default function Product() {
             </Protect>
         </main>
     );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
 }
